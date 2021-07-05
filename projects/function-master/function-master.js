@@ -73,7 +73,9 @@ function capitalizeAllWords(string) {
 //////////////////////////////////////////////////////////////////////
 
 function welcomeMessage(object) {
-
+let string = "Welcome " + capitalizeWord(object.name) + "!";
+//console.log(string);
+return string;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -81,7 +83,8 @@ function welcomeMessage(object) {
 //////////////////////////////////////////////////////////////////////
 
 function profileInfo(object) {
-
+let string = `${capitalizeWord(object.name)} is a ${capitalizeWord(object.species)}`;
+return string;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -89,7 +92,9 @@ function profileInfo(object) {
 //////////////////////////////////////////////////////////////////////
 
 function maybeNoises(object) {
-
+    let newstr = arrayOrObject(object.noises) === 'array' 
+&& object.noises.length > 1 ? object.noises.join(" ") : 'there are no noises';
+return newstr;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -97,7 +102,7 @@ function maybeNoises(object) {
 //////////////////////////////////////////////////////////////////////
 
 function hasWord(string, word) {
-
+return string.includes(word);
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -105,7 +110,8 @@ function hasWord(string, word) {
 //////////////////////////////////////////////////////////////////////
 
 function addFriend (name, object) {
-
+object.friends.push(name);
+return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -113,7 +119,9 @@ function addFriend (name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function isFriend(name, object) {
-
+let friend = arrayOrObject(object.friends) === "array" &&
+object.friends.includes(name) ? true : false;
+return friend;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -121,7 +129,16 @@ function isFriend(name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function nonFriends(name, array) {
+let result = [];
 
+for (let i = 0; i < array.length; i++) {
+    if (name !== array[i].name) {
+        if (!array[i].friends.includes(name)) {
+            result.push(array[i].name);
+        }
+    }
+}
+return result;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -129,7 +146,16 @@ function nonFriends(name, array) {
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-
+if (!object.hasOwnProperty(key)) {
+    object[key] = value;
+} else {
+    for (let keys in object) {
+        if (keys === key) {
+            object[keys] = value;
+        }
+    }
+} 
+return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -137,7 +163,14 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-
+for (let i = 0; i < array.length; i++) {
+    for (let key in object) {
+        if (array[i] === key) {
+            delete object[key];
+        }
+    }
+    
+} return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -145,7 +178,7 @@ function removeProperties(object, array) {
 //////////////////////////////////////////////////////////////////////
 
 function dedup(array) {
-
+return Array.from(new Set (array));
 }
 
 //////////////////////////////////////////////////////////////////////
