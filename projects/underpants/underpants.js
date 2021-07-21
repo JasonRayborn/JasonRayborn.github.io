@@ -243,6 +243,16 @@ _.unique = function(array) {
 */
 
 
+_.filter = function(array, func) {
+    let newArr = [];
+    _.each(array, function(ele, i, array) {
+        if (func(ele, i, array)) {
+            newArr.push(ele);
+        }
+    });
+    return newArr;
+}
+
 /** _.reject
 * Arguments:
 *   1) An array
@@ -256,6 +266,16 @@ _.unique = function(array) {
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+
+_.reject = function(array, func) {
+    let arr = [];
+    _.each(array, function(ele, i, array) {
+        if (!func(ele, i, array)) {
+            arr.push(ele);
+        }
+    });
+    return arr;
+}
 
 /** _.partition
 * Arguments:
@@ -277,6 +297,11 @@ _.unique = function(array) {
 */
 
 
+_.partition = function (array, func) {
+return [_.filter(array, func), _.reject(array, func)];
+};
+
+
 /** _.map
 * Arguments:
 *   1) A collection
@@ -294,6 +319,20 @@ _.unique = function(array) {
 */
 
 
+_.map = function (collection, action) {
+    let newArray = [];
+    if (Array.isArray(collection)) { 
+        for (let i = 0; i < collection.length; i++) {
+            newArray.push(action(collection[i], i, collection));
+        }
+    } else if (!Array.isArray(collection) && typeof collection === 'object') {
+        for (let key in collection) {
+            newArray.push(action(collection[key], key, collection));
+        }
+    }
+          return newArray;
+};
+
 /** _.pluck
 * Arguments:
 *   1) An array of objects
@@ -304,6 +343,15 @@ _.unique = function(array) {
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+
+
+_.pluck = function (array, property) {
+    let names = array.map(function(item, index, array) {
+        return item['name'];
+    });
+    return names;
+    };
+
 
 
 /** _.every
@@ -326,6 +374,18 @@ _.unique = function(array) {
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
+
+_.every = function(collection, func) {
+    var check = func || _.identity;
+    for (var i = 0;i < collection.length;i++) {
+        if (! check(collection[i])) {
+            return false;
+        }
+    }
+    return true;
+};
+
+
 
 
 /** _.some
@@ -350,6 +410,23 @@ _.unique = function(array) {
 */
 
 
+_.some = function some(collection, func) {
+    
+    let result = false;
+    _.each(collection, function(e, i, collection){
+        if (typeof func !== 'function'){
+            if (e){
+            result = true;    
+            }
+        }
+        else if (func(e, i, collection)){
+            result = true;
+        }
+    });
+    return result;
+ }
+
+
 /** _.reduce
 * Arguments:
 *   1) An array
@@ -370,6 +447,27 @@ _.unique = function(array) {
 */
 
 
+_.reduce = function(array, callbackFunction, initialValue) {
+    if (initialValue != undefined) {
+        var result = initialValue;
+      _.each(array, function(element, index, array) {
+          result = callbackFunction(result, element, index, array);
+      });
+      return result;
+      }
+        else {
+            var result = array[0];
+            _.each(array, function(element, index, array) {
+                if (index != 0) {
+                    result = callbackFunction(result, element, index, array);
+                }
+            });
+            return result;
+        }
+    };
+
+
+
 /** _.extend
 * Arguments:
 *   1) An Object
@@ -384,6 +482,17 @@ _.unique = function(array) {
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+
+_.extend = function(...obj){
+    //declare a finalTarget object
+    var finalTarget = {};
+    //Object.assign will copy all properties from object2 and paste them in object 1
+    finalTarget = Object.assign(...obj);
+    //remember to return the update object
+    return finalTarget;
+};
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////

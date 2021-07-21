@@ -12,9 +12,9 @@ based on the value of its right operand
 -=.. Subtract then assign
 *=.. Multiply then assign
 /*Example*/
- let x = 1; //assigns the value of y to x
+ let x = 1; //assigns the value of 1 to x
  console.log(x); // logs 1 to the console
- 
+
  
  /*Comparsion Operator*/
  /*A comparison operator compares its operands and returns a logical
@@ -40,10 +40,16 @@ based on the value of its right operand
  *Increment ++: Unary operator that adds one to its operand.
  *Decrement --: Unary operator that subtracts one from the operand
  *Add +: Adds both operands 
- *Subtract -: Subtract both operands
+ *Subtract -: Subtract both operands 
  *Multiply *: Multiply both operands together
  *Divide /: Divide both operands
  */
+ var additionOutput = 2 + 2; //addition
+var subtractionOutput = 2 - 2; //subtraction
+var multiplcationOutput = 2 * 2; //multiplcation
+var divisionOutput = 2 / 2; //division
+var exponentiation = 2**2; // Exponentiation
+var modulus = 5 % 2; // Modulus (Remainder)
  
  
  /*Logical Operators*/
@@ -58,6 +64,23 @@ based on the value of its right operand
  *Not ! Operator: !sum1 / Returns false if its single operand that can be converted
  to true, otherwise it returns true.
  */
+ let a = 1;
+ let b = 4;
+ if (a || b) {
+	console.log("I will run if either a or b are true");
+}
+
+if (a && b) {
+	console.log("I will run, if and only if a and b are both true");
+}
+
+if (!a) {
+	console.log("I will only run if a is false");
+}
+
+if (a) {
+	console.log("I will only run if a is true");
+}
  
  
  /*Conditional (ternary) Operator*/
@@ -68,3 +91,19 @@ based on the value of its right operand
  /*Example*/
  let ofAge = (16 >= 18) ? "adult" : "minor";
  console.log(ofAge); // returns "minor"
+ 
+ 
+ /*Unary Operator*/
+ /*A unary operation is an operation with only one operand. 
+ This operand comes either before or after the operator.
+ */
+ /*Example*/
+ /*Operator	Explanation
+Unary plus (+)	Tries to convert the operand into a number
+Unary negation (-)	Tries to convert the operand into a number and negates after
+Increment (++)	Adds one to its operand
+Decrement (--)	Decrements by one from its operand
+Logical NOT (!)	Converts to boolean value then negates it
+*/
+var unaryOperator = 1; 
+++unaryOperator; // Unary Operator Increment // ++ , --

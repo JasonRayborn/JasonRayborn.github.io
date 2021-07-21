@@ -33,3 +33,32 @@ console.log(myName); // prints => bob
 var myVariable = 1;
 var myVariable = true;
 myVariable = "someString";
+
+
+/*Using let*/
+/* let is now preferred for a variable declaration. It also solves
+the problem with var.
+let is blocked scoped
+A block is a chuck of code bounded by {}. Anything within curly braces is a block.
+*/
+/*Example*/
+let greeting = "say Hi";
+   let times = 4;
+
+   if (times > 3) {
+        let hello = "say Hello instead";
+        console.log(hello);// "say Hello instead"
+    }
+   //console.log(hello) // hello is not defined
+   
+   
+   /*Using const*/
+   /*Variables declared with the const maintain constant values. 
+   const declarations share some similarities with let declarations.
+   const is also blocked scoped.
+   const cannot be updated or re-declared. This means the value of a variable
+   declared with const remains the same within the scope.
+   */
+   /*Example*/
+       //const greeting = "say Hi";
+    greeting = "say Hello instead";// error: Assignment to constant variable
